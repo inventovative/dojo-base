@@ -1,0 +1,26 @@
+{
+  "name": "dojo_framework",
+  "version": "1.0.0",
+  "authors": [
+    "Mukhlis Kushairi <mukhliskushairi@gmail.com>"
+  ],
+  "description": "Dojo framework starter",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "dojo": "dojo/dojo#^1.11.1",
+    "dijit": "dojo/dijit#^1.11.1",
+    "dojox": "dojo/dojox#^1.11.1",
+    "util": "dojo/util#^1.11.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap3-ie10-viewport-bug-workaround": "https://github.com/Haixing-Hu/bootstrap3-ie10-viewport-bug-workaround.git#^1.0.0"
+  }
+}

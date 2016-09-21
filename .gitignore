@@ -1,0 +1,9 @@
+node_modules/
+*.scssc
+
+release/
+
+src/*
+!src/app/
+!src/assets/
+!src/index.html
