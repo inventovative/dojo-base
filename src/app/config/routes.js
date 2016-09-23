@@ -40,8 +40,8 @@ define([
 			}];
 
 			array.forEach(keypairs, function (keypair, i) {
-				require([keypair.uri], function (Block) {
-					router.register(keypair.route, function (evt) {
+				router.register(keypair.route, function (evt) {
+					require([keypair.uri], function (Block) {
 						context.clearCurrentView();
 
 						currentView = new Block();
@@ -55,12 +55,12 @@ define([
 						currentView.placeAt(options.containerNode);
 						currentView.startup();
 					});
-
-					if (i === keypairs.length - 1) {
-						router.startup();
-						router.go('/login');
-					}
 				});
+
+				if (i === keypairs.length - 1) {
+					router.startup();
+					router.go('/login');
+				}
 			});
 		},
 		clearCurrentView: function () {
