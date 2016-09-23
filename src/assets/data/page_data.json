@@ -1,0 +1,7 @@
+[{
+	"uri": "app/pages/landing/Landing",
+	"route": "/home"
+}, {
+	"uri": "app/pages/login/Login",
+	"route": "/login"
+}]
