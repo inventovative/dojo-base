@@ -3,18 +3,17 @@ define([
 	'dojo/on',
 	'dojo/router',
 	'dojo/text!./html/Login.html',
-	'dijit/_TemplatedMixin',
-	'dijit/_WidgetBase'
+	'app/pages/PageWidget'
 ], function (
 	declare,
 	on,
 	router,
 	template,
-	_TemplatedMixin,
-	_WidgetBase
+	PageWidget
 ) {
-	return declare('app.pages.login.Login', [_WidgetBase, _TemplatedMixin], {
+	return declare('app.pages.login.Login', [PageWidget], {
 		templateString: template,
+		navbar: false, // Hide navbar before rendering
 		postCreate: function () {
 			this.inherited(arguments);
 

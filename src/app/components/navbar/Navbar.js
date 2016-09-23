@@ -24,26 +24,16 @@ define([
 	var Navbar = declare('app.components.navbar.Navbar', [_WidgetBase, _TemplatedMixin], {
 		templateString: template,
 		hidden: true,
-		startup: function () {
-			this.inherited(arguments);
-
-			var context = this;
-			context.set('hidden', false);
-		},
 		_setHiddenAttr: function (shouldHide) {
 			var context = this;
 			var domNode = this.domNode;
 
 			if (shouldHide) {
-				if (!context.get('hidden')) {
-					domStyle.set(domNode, 'display', 'none');
-					domClass.remove(body, 'p-t-70');
-				}
+				domStyle.set(domNode, 'display', 'none');
+				domClass.remove(body, 'p-t-70');
 			} else {
-				if (context.get('hidden')) {
-					domStyle.set(domNode, 'display', 'block');
-					domClass.add(body, 'p-t-70');
-				}
+				domStyle.set(domNode, 'display', 'block');
+				domClass.add(body, 'p-t-70');
 			}
 
 			context._set('hidden', shouldHide);

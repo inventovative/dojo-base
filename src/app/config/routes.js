@@ -1,16 +1,14 @@
 define([
+	'dojo/_base/array',
 	'dojo/_base/lang',
 	'dojo/router',
-	'app/components/navbar/Navbar',
-	'app/pages/landing/Landing',
-	'app/pages/login/Login'
+	'app/components/navbar/Navbar'
 ], function (
+	array,
 	lang,
 	router,
-	Navbar,
-	Landing,
-	Login
-) {	
+	Navbar
+) {
 	var options = {
 		containerNode: undefined
 	};
@@ -32,32 +30,38 @@ define([
 		setupRoutes: function () {
 			var context = this;
 
-			router.register('/home', function (evt) {
-				context.clearCurrentView();
-				Navbar.show();
+			// TODO: change this to a JSON file
+			var keypairs = [{
+				uri: 'app/pages/landing/Landing',
+				route: '/home'
+			}, {
+				uri: 'app/pages/login/Login',
+				route: '/login'
+			}];
 
-				currentView = new Landing();
-				currentView.placeAt(options.containerNode);
-				currentView.startup();
+			array.forEach(keypairs, function (keypair, i) {
+				require([keypair.uri], function (Block) {
+					router.register(keypair.route, function (evt) {
+						context.clearCurrentView();
+
+						currentView = new Block();
+
+						if (currentView.navbar) {
+							Navbar.show();
+						} else {
+							Navbar.hide();
+						}
+
+						currentView.placeAt(options.containerNode);
+						currentView.startup();
+					});
+
+					if (i === keypairs.length - 1) {
+						router.startup();
+						router.go('/login');
+					}
+				});
 			});
-
-			router.register('/login', function (evt) {
-				context.clearCurrentView();
-				Navbar.hide();
-
-				currentView = new Login();
-				currentView.placeAt(options.containerNode);
-				currentView.startup();
-			});
-
-			router.register('/logout', function (evt) {
-				// TODO: Do the logout process
-				// Then go to the login screen
-				router.go('/login');
-			});
-
-			router.startup();
-			router.go('/login');
 		},
 		clearCurrentView: function () {
 			if (currentView !== null) {

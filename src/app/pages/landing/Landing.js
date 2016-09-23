@@ -2,20 +2,17 @@ define([
 	'dojo/_base/declare',
 	'dojo/on',
 	'dojo/text!./html/Landing.html',
-	'dijit/_TemplatedMixin',
-	'dijit/_WidgetBase',
-	'app/components/navbar/Navbar'
+	'app/components/navbar/Navbar',
+	'app/pages/PageWidget'
 ], function (
 	declare,
 	on,
 	template,
-	_TemplatedMixin,
-	_WidgetBase,
-	Navbar
+	Navbar,
+	PageWidget
 ) {
-	return declare('app.pages.landing.Landing', [_WidgetBase, _TemplatedMixin], {
+	return declare('app.pages.landing.Landing', [PageWidget], {
 		templateString: template,
-		someListener: null,
 		postCreate: function () {
 			this.inherited(arguments);
 
