@@ -20,7 +20,6 @@ define([
 			method: 'GET',
 			handleAs: 'json'
 		}).then(function (response) {
-			console.log(response);
 			deferred.resolve(response);
 		}, function (err) {
 			throw new Error(err);
