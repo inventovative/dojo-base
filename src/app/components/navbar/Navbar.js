@@ -1,6 +1,5 @@
 define([
 	'dojo/_base/declare',
-	'dojo/_base/lang',
 	'dojo/_base/window',
 	'dojo/dom-class',
 	'dojo/dom-style',
@@ -9,7 +8,6 @@ define([
 	'dijit/_WidgetBase'
 ], function (
 	declare,
-	lang,
 	win,
 	domClass,
 	domStyle,
@@ -43,18 +41,15 @@ define([
 	// Instantiate the Navbar class as a singleton
 	var navbar = new Navbar();
 
-	// Default options
-	var options = {
-		containerNode: undefined
-	};
+	var containerNode;
 
 	// An object that will be returned from this module
 	return {
-		init: function (opts) {
-			lang.mixin(options, opts);
-
-			if (options.containerNode !== undefined) {
-				navbar.placeAt(options.containerNode);
+		init: function (node) {
+			containerNode = node;
+			
+			if (containerNode !== undefined) {
+				navbar.placeAt(containerNode);
 				navbar.startup();
 			} else {
 				throw new Error('containerNode is undefined.');

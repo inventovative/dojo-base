@@ -11,19 +11,16 @@ define([
 	Navbar,
 	http
 ) {
-	var options = {
-		containerNode: undefined
-	};
-
-	var currentView = null;
+	var containerNode;
+	var currentView;
 
 	return {
-		init: function (opts) {
+		init: function (node) { // Second argument (options object) can be placed (for future reference)
 			var context = this;
 
-			lang.mixin(options, opts !== undefined ? opts : {});
+			containerNode = node;
 
-			if (options.containerNode === undefined) {
+			if (containerNode === undefined) {
 				throw new Error('containerNode is undefined.');
 			} else {
 				context.setupRoutes();
@@ -48,7 +45,7 @@ define([
 								Navbar.hide();
 							}
 
-							currentView.placeAt(options.containerNode);
+							currentView.placeAt(containerNode);
 							currentView.startup();
 						});
 					});
@@ -61,7 +58,7 @@ define([
 			});
 		},
 		clearCurrentView: function () {
-			if (currentView !== null) {
+			if (currentView !== undefined) {
 				currentView.destroy();
 			}
 		}

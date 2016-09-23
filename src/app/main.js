@@ -14,8 +14,8 @@ require([
 	var mainContainer = dom.byId('mainContainer');
 
 	// Initialise the Navbar
-	Navbar.init({ containerNode: navbarContainer });
+	Navbar.init(navbarContainer);
 
 	// Initialize all routes
-	routes.init({ containerNode: mainContainer });
+	routes.init(mainContainer);
 });
