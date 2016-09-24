@@ -1,12 +1,10 @@
 define([
 	'dojo/_base/array',
-	'dojo/_base/lang',
 	'dojo/router',
 	'app/components/navbar/Navbar',
 	'app/services/http'
 ], function (
 	array,
-	lang,
 	router,
 	Navbar,
 	http

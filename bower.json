@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "bootstrap3-ie10-viewport-bug-workaround": "https://github.com/Haixing-Hu/bootstrap3-ie10-viewport-bug-workaround.git#^1.0.0"
+    "bootstrap3-ie10-viewport-bug-workaround": "https://github.com/Haixing-Hu/bootstrap3-ie10-viewport-bug-workaround.git#^1.0.0",
+    "localforage": "^1.4.2"
   }
 }
