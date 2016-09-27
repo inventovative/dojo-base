@@ -3,13 +3,15 @@ define([
 	'dojo/on',
 	'dojo/router',
 	'dojo/text!./html/Login.html',
-	'app/pages/PageWidget'
+	'app/pages/PageWidget',
+	'app/services/auth'
 ], function (
 	declare,
 	on,
 	router,
 	template,
-	PageWidget
+	PageWidget,
+	auth
 ) {
 	return declare('app.pages.login.Login', [PageWidget], {
 		templateString: template,
@@ -25,7 +27,12 @@ define([
 				// Try to comment evt.preventDefault() and see what happens
 				// when you click Sign in
 				evt.preventDefault();
-				router.go('/home');
+
+				// login service to call API here
+				
+				auth.setLoginStatus(true).then(function () {
+					router.go('/home');
+				});
 			}));
 		}
 	});
