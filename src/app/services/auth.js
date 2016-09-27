@@ -10,7 +10,7 @@ define([
 	auth.getLoginStatus = function () {
 		var deferred = new Deferred();
 
-		localforage.getItem('isLoggedIn', function (value) {
+		localforage.getItem('isLoggedIn').then(function (value) {
 			if (value === null) {
 				localforage.setItem('isLoggedIn', false, function () {
 					deferred.resolve(false);
@@ -27,7 +27,7 @@ define([
 		var deferred = new Deferred();
 
 		if (typeof status === 'boolean') {
-			localforage.setItem('isLoggedIn', status, function () {
+			localforage.setItem('isLoggedIn', status).then(function () {
 				deferred.resolve();
 			});
 		}

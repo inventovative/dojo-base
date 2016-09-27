@@ -2,11 +2,13 @@ define([
 	'dojo/_base/array',
 	'dojo/router',
 	'app/components/navbar/Navbar',
+	'app/services/auth',
 	'app/services/http'
 ], function (
 	array,
 	router,
 	Navbar,
+	auth,
 	http
 ) {
 	var containerNode;
@@ -32,25 +34,49 @@ define([
 
 				array.forEach(keypairs, function (keypair, i) {
 					router.register(keypair.route, function (evt) {
-						require([keypair.uri], function (Block) {
-							context.clearCurrentView();
-
-							currentView = new Block();
-
-							if (currentView.navbar) {
-								Navbar.show();
+						auth.getLoginStatus().then(function (isLoggedIn) {
+							if (isLoggedIn) {
+								if (keypair.route === '/login') {
+									router.go('/home');
+								} else {
+									requireWidget();
+								}
 							} else {
-								Navbar.hide();
+								if (keypair.route !== '/login') {
+									router.go('/login');
+								} else {
+									requireWidget();
+								}
 							}
-
-							currentView.placeAt(containerNode);
-							currentView.startup();
 						});
+
+						function requireWidget() {
+							require([keypair.uri], function (Block) {
+								context.clearCurrentView();
+
+								currentView = new Block();
+
+								if (currentView.navbar) {
+									Navbar.show();
+								} else {
+									Navbar.hide();
+								}
+
+								currentView.placeAt(containerNode);
+								currentView.startup();
+							});
+						}
 					});
 
 					if (i === keypairs.length - 1) {
-						router.startup();
-						router.go('/login');
+						auth.getLoginStatus().then(function (isLoggedIn) {
+							router.startup();
+							if (isLoggedIn) {
+								router.go('/home');
+							} else {
+								router.go('/login');
+							}
+						});
 					}
 				});
 			});

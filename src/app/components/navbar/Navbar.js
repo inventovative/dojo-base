@@ -3,17 +3,23 @@ define([
 	'dojo/_base/window',
 	'dojo/dom-class',
 	'dojo/dom-style',
+	'dojo/on',
+	'dojo/router',
 	'dojo/text!./html/Navbar.html',
 	'dijit/_TemplatedMixin',
-	'dijit/_WidgetBase'
+	'dijit/_WidgetBase',
+	'app/services/auth'
 ], function (
 	declare,
 	win,
 	domClass,
 	domStyle,
+	on,
+	router,
 	template,
 	_TemplatedMixin,
-	_WidgetBase
+	_WidgetBase,
+	auth
 ) {
 	// Get the <body> DOM
 	var body = win.body();
@@ -22,6 +28,17 @@ define([
 	var Navbar = declare('app.components.navbar.Navbar', [_WidgetBase, _TemplatedMixin], {
 		templateString: template,
 		hidden: true,
+		postCreate: function () {
+			var context = this;
+
+			context.inherited(arguments);
+
+			context.own(on(context.logoutNode, 'click', function () {
+				auth.setLoginStatus(false).then(function () {
+					router.go('/login');
+				});
+			}));
+		},
 		_setHiddenAttr: function (shouldHide) {
 			var context = this;
 			var domNode = this.domNode;
