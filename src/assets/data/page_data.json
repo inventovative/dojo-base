@@ -1,4 +1,7 @@
 [{
+	"uri": "app/pages/components/Components",
+	"route": "/components"
+}, {
 	"uri": "app/pages/landing/Landing",
 	"route": "/home"
 }, {
