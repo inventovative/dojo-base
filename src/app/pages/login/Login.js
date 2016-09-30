@@ -1,5 +1,6 @@
 define([
 	'dojo/_base/declare',
+	'dojo/dom-attr',
 	'dojo/on',
 	'dojo/router',
 	'dojo/text!./html/Login.html',
@@ -7,6 +8,7 @@ define([
 	'app/services/auth'
 ], function (
 	declare,
+	domAttr,
 	on,
 	router,
 	template,
@@ -29,9 +31,10 @@ define([
 				evt.preventDefault();
 
 				// login service to call API here
-				
-				auth.setLoginStatus(true).then(function () {
-					router.go('/home');
+				auth.login(domAttr.get(context.emailNode, 'value'), domAttr.get(context.passwordNode, 'value')).then(function () {
+					auth.setLoginStatus(true).then(function () {
+						router.go('/home');
+					});
 				});
 			}));
 		}

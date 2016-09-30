@@ -8,7 +8,7 @@ define([
 	var auth = {};
 
 	auth.login = function (username, password) {
-		// var deferred = new Deferred();
+		var deferred = new Deferred();
 
 		http.get('/key', {
 			headers: {
@@ -16,12 +16,24 @@ define([
 			},
 			getHeaders: ['Key']
 		}).then(function (response) {
-			console.log(response);
+			var jsEncrypt = new JSEncrypt();
+			jsEncrypt.setPublicKey(response.headers.Key);
+			var encrypted = jsEncrypt.encrypt(username + '.' + password);
 			
-			// Login API call here
+			return http.post('http://localhost:3000/login', {
+				data: encrypted
+			});
+		}).then(function (response) {
+			if (response.error) {
+				throw new Error(response.errorDesc);
+			}
+
+			// Save JWT token here
+
+			deferred.resolve();
 		});
 
-		// return deferred.promise;
+		return deferred.promise;
 	};
 
 	auth.getLoginStatus = function () {

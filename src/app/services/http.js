@@ -76,7 +76,7 @@ define([
 		var deferred = new Deferred();
 
 		xhr(url, {
-			headers: headerObj,
+			headers: headerObj === undefined ? headers : headerObj,
 			method: 'POST',
 			handleAs: 'json',
 			data: data
