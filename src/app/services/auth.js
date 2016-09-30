@@ -1,11 +1,28 @@
 define([
-	'dojo/Deferred'
+	'dojo/Deferred',
+	'app/services/http'
 ], function (
-	Deferred
+	Deferred,
+	http
 ) {
 	var auth = {};
 
-	//JWT needs to be applied here
+	auth.login = function (username, password) {
+		// var deferred = new Deferred();
+
+		http.get('/key', {
+			headers: {
+				'Access-Control-Allow-Headers': 'Key'
+			},
+			getHeaders: ['Key']
+		}).then(function (response) {
+			console.log(response);
+			
+			// Login API call here
+		});
+
+		// return deferred.promise;
+	};
 
 	auth.getLoginStatus = function () {
 		var deferred = new Deferred();

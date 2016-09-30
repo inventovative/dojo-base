@@ -19,9 +19,7 @@ var dojoConfig = {
 		name: 'app',
 		location: 'app'
 	}],
-	isOnline: {
-		status: false,
-		link: ''
-	},
+	isOnline: false,
+	restUrl: 'http://localhost:3000',
 	cacheBust: false
 };

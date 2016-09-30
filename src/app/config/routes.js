@@ -29,7 +29,7 @@ define([
 		setupRoutes: function () {
 			var context = this;
 
-			http.get('assets/data/page_data.json').then(function (response) {
+			http.getLocal('assets/data/page_data.json').then(function (response) {
 				var keypairs = response;
 
 				array.forEach(keypairs, function (keypair, i) {
