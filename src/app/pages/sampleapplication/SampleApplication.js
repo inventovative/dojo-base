@@ -22,7 +22,6 @@ define([
 
 			var context = this;
 
-			context.saveData = [];
 			context.userCells = [];
 
 			context.setupContent();
@@ -159,10 +158,6 @@ define([
 
 			// Populate to cell
 			array.forEach(response.list, function (single) {
-				single.callback = function (data) {
-					context.saveData.push(data);
-				};
-
 				var userCell = new UserCell();
 				userCell.placeAt(context.usersContainerNode);
 				userCell.construct(single);
@@ -179,7 +174,11 @@ define([
 
 				array.forEach(context.userCells, function (userCell) {
 					// Call each onSave methods on each cells
-					userCell.onSave();
+					var data = userCell.onSave();
+
+					if (data !== null) {
+						context.saveData.push(data);
+					}
 				});
 
 				// Send this over to BE

@@ -73,7 +73,9 @@ define([
 						break;
 				}
 
-				context.setting.callback(dataToPass);
+				return dataToPass;
+			} else {
+				return null;
 			}
 		},
 		// To convert 'Y' and 'N' to boolean
