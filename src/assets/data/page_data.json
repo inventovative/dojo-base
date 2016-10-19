@@ -10,4 +10,7 @@
 }, {
 	"uri": "app/pages/services/Services",
 	"route": "/services"
+}, {
+	"uri": "app/pages/sampleapplication/SampleApplication",
+	"route": "/sample-application"
 }]
